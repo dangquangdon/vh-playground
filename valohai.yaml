@@ -1,0 +1,20 @@
+- step:
+    name: pg-query
+    image: python:3.12
+    command:
+      - pip install -r requirements.txt
+      - python -m pg
+    parameters:
+      - name: sql_query
+        type: string
+        default: SELECT VERSION();
+        description: SQL query to be executed
+        widget: SQL
+      - name: datum_alias
+        type: string
+        description: Valohai datum alias given for the output
+        optional: true
+        widget: datumalias
+    environment-variables:
+      - name: PG_CONN_STR
+        description: PG connection string
