@@ -1,0 +1,13 @@
+- step:
+    name: s3-upload
+    image: python:3.12
+    command:
+      - cd s3
+      - pip install -r requirements.txt
+      - python mlf.py
+    parameters:
+      - name: datum_alias
+        type: string
+        description: Valohai datum alias given for the output
+        optional: true
+        widget: datumalias
