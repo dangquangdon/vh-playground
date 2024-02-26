@@ -2,6 +2,7 @@
     name: pg-query
     image: python:3.12
     command:
+      - cd pg
       - pip install -r requirements.txt
       - python -m pg
     parameters:
