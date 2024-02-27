@@ -26,5 +26,25 @@
     inputs:
       - name: large_file
         default:
-          - s3://staging-roi-storage/data/01HQK/01HQKWHJNVCEG1APNC09CENNR0/output-3/4gb.file
+          - <s3-file-arn>
         optional: false
+
+- step:
+    name: vh-download-threads
+    image: python:3.12
+    command:
+      - cd s3
+      - pip install -r requirements.txt
+      - python vh_download_threads.py
+      - pip install awscli
+      - pip install awscrt
+      - export AWS_ACCESS_KEY_ID=<key>
+      - export AWS_SECRET_ACCESS_KEY=<secret>
+      - export AWS_DEFAULT_REGION=eu-west-1
+      - aws configure set s3.preferred_transfer_client crt
+      - time aws s3 cp <s3-file-arn> /tmp/4gb.file
+      - ls -la /tmp
+      - python compares.py
+    parameters:
+      - name: large_file
+        optional: true
