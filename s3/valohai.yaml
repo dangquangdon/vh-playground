@@ -11,3 +11,7 @@
         description: Valohai datum alias given for the output
         optional: true
         widget: datumalias
+      - name: file_size
+        type: integer
+        description: Size of the file
+        default: 5

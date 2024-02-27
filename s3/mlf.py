@@ -5,10 +5,11 @@ import json
 BYTES_IN_GIGABYTE = 1024 * 1024 * 1024
 
 def create_file():
-    output = valohai.outputs().path("10gb.file")
+    size = int(valohai.parameters("file_size").value)
+    output = valohai.outputs().path(f"{size}gb.file")
 
     with open(output, "w+b") as f:
-        fallocate(f, 0, 10 * BYTES_IN_GIGABYTE)
+        fallocate(f, 0, size * BYTES_IN_GIGABYTE)
 
     metadata = {
         "valohai.alias": valohai.parameters("datum_alias").value,
