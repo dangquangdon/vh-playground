@@ -15,3 +15,16 @@
         type: integer
         description: Size of the file
         default: 5
+
+- step:
+    name: vh-download
+    image: python:3.12
+    command:
+      - cd s3
+      - pip install -r requirements.txt
+      - python vh_download.py
+    inputs:
+      - name: large_file
+        default:
+          - s3://staging-roi-storage/data/01HQK/01HQKWHJNVCEG1APNC09CENNR0/output-3/4gb.file
+        optional: false
