@@ -2,12 +2,9 @@
     name: jinga
     image: python:3.11-slim
     command:
-    - apt-get -y update
-    - apt-get -y install curl
     - cd params
-    - curl -O https://7e7e-176-72-7-168.ngrok-free.app/valohai_utils-0.4.0-py3-none-any.whl
     - pip install valohai_utils-0.4.0-py3-none-any.whl
-    - python data_cleaning.py
+    - python data_cleaning.py {parameters}
     inputs:
     - name: nemo
       optional: true
