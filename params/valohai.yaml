@@ -1,0 +1,48 @@
+- step:
+    name: jinga
+    image: python:3.11-slim
+    command:
+      - pip install -r requirements.txt
+      - python ./data_cleaning.py {parameters}
+    inputs:
+    - name: nemo
+      optional: true
+    parameters:
+      - name: null_lookup_columns
+        default:
+        - Name
+        - Email
+        multiple: separate
+        multiple-separator: ','
+        optional: true
+        type: string
+      - name: duplicate_lookup_columns
+        default:
+        - Age
+        multiple: separate
+        multiple-separator: ','
+        optional: true
+        type: string
+
+- step:
+    name: jinga2
+    image: python:3.11-slim
+    command:
+      - pip install -r requirements.txt
+      - python ./data_cleaning.py {parameters}
+    inputs:
+    - name: nemo
+      optional: true
+    parameters:
+      - name: null_lookup_columns
+        default: [Name, Email]
+        multiple: separate
+        multiple-separator: ','
+        optional: true
+        type: string
+      - name: duplicate_lookup_columns
+        default: [Age]
+        multiple: separate
+        multiple-separator: ','
+        optional: true
+        type: string
