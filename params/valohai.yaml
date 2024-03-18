@@ -16,6 +16,7 @@
         multiple-separator: ','
         optional: true
         type: string
+        widget: 'combo'
       - name: duplicate_lookup_columns
         default:
         - Age
