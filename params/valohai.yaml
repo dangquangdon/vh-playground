@@ -3,7 +3,7 @@
     image: python:3.11-slim
     command:
       - pip install -r requirements.txt
-      - python ./data_cleaning.py {parameters}
+      - python ./data_cleaning.py
     inputs:
     - name: nemo
       optional: true
@@ -16,7 +16,6 @@
         multiple-separator: ','
         optional: true
         type: string
-        widget: 'combo'
       - name: duplicate_lookup_columns
         default:
         - Age
