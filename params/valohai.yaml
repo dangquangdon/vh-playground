@@ -24,6 +24,11 @@
         multiple-separator: ','
         optional: true
         type: string
+      - name: another_param
+        default:
+        - Age
+        optional: true
+        type: string
 
 - step:
     name: jinga2
