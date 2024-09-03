@@ -64,17 +64,11 @@ def get_theme_inferences(script):
 
     theme_output = theme_classifer(batches, theme_list, multi_label=True)
     themes = {}
-    with valohai.logger() as logger:
-        counter = 0
-        for output in theme_output:
-            counter += 1
-            logger.log("batch", counter)
-            for label, score in zip(output["labels"], output["scores"]):
-                logger.log("theme", label)
-                logger.log("score", score)
-                if label not in themes:
-                    themes[label] = []
-                themes[label].append(score)
+    for output in theme_output:
+        for label, score in zip(output["labels"], output["scores"]):
+            if label not in themes:
+                themes[label] = []
+            themes[label].append(score)
     return {key: np.mean(np.array(value)) for key, value in themes.items()}
 
 
@@ -105,8 +99,9 @@ if __name__ == "__main__":
     themes_df = pd.DataFrame(output_thems.tolist())
     themes_df.to_csv(output, encoding='utf-8', index=False)
 
-    # with valohai.logger() as logger:
-    #     themes = themes_df.to_dict("index")
-    #     for data in themes.values():
-    #         for key, val in data.items():
-    #             logger.log(key, val)
+    with valohai.logger() as logger:
+        for index, row in themes_df.iterrows():
+            logger.log("ep", index)
+            # Iterate over the columns in the current row
+            for col_name in themes_df.columns:
+                logger.log(col_name, row[col_name])
