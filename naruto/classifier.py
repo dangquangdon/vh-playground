@@ -1,7 +1,7 @@
 import torch
 import pandas as pd
 import numpy as np
-import zipfile
+import os
 import valohai
 import json
 
@@ -50,11 +50,9 @@ def load_subtitles_files(files_path):
     )
 
 
-def unzip_data(path_to_zip_file, directory_to_extract_to):
-    with zipfile.ZipFile(path_to_zip_file, "r") as zip_ref:
-        zip_ref.extractall(directory_to_extract_to)
-
-    return directory_to_extract_to
+def unzip_data_dir(path_to_zip_file):
+    return os.path.dirname(path_to_zip_file)
+    
 
 def get_theme_inferences(script):
     sentences = sent_tokenize(script)
@@ -76,10 +74,8 @@ def get_theme_inferences(script):
 
 if __name__ == "__main__":
     input_zipfile = valohai.inputs('subtitles').path()
-    print("INPUT ZIPFILE: ", input_zipfile)
     example_size = int(valohai.parameters('example_size').value)
     output = valohai.outputs().path("classified_themes.csv")
-    print("OUTPUT FILE: ", output)
 
     theme_classifer = load_model(device)
 
@@ -94,7 +90,7 @@ if __name__ == "__main__":
         "dialogue",
     ]
 
-    subtitle_dir = unzip_data(input_zipfile, "/tmp/subtitles")
+    subtitle_dir = unzip_data_dir(input_zipfile)
     df = load_subtitles_files(f"{subtitle_dir}/*.ass")
     if example_size:
         df = df.head(example_size)
