@@ -63,8 +63,12 @@ class JutsuSpider(Spider):
 
 
 if __name__ == "__main__":
-    output = valohai.outputs().path("output.txt")
+    output = valohai.outputs().path("output.jsonl")
 
-    process = CrawlerProcess()
+    process = CrawlerProcess({
+        'FEED_FORMAT': 'jsonl',
+        'FEED_URI': output,
+        'LOG_ENABLED': False,
+    })
     process.crawl(JutsuSpider, output=output)
     process.start()
