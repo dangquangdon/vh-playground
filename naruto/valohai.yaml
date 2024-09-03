@@ -25,7 +25,10 @@
 - step:
     name: random metadata
     image: python:3.12
-    command: python train.py {parameters}
+    command:
+      - cd naruto
+      - pip install valohai-utils
+      - python random_metadata.py
     parameters:
       - name: how_random
         description: How random you want the metadata to be
