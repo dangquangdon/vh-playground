@@ -21,3 +21,21 @@
         default: 2
         optional: false
         type: integer
+
+- step:
+    name: random metadata
+    image: python:3.12
+    command: python train.py {parameters}
+    parameters:
+      - name: how_random
+        description: How random you want the metadata to be
+        type: float
+        default: 0.05
+      - name: epochs
+        description: How many epochs do you want?
+        type: integer
+        default: 10
+      - name: wait_time
+        description: How long to wait between generated metadata (seconds)
+        type: float
+        default: 1
