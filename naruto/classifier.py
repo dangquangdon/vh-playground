@@ -76,8 +76,10 @@ def get_theme_inferences(script):
 
 if __name__ == "__main__":
     input_zipfile = valohai.inputs('subtitles').path()
+    print("INPUT ZIPFILE: ", input_zipfile)
     example_size = int(valohai.parameters('example_size').value)
     output = valohai.outputs().path("classified_themes.csv")
+    print("OUTPUT FILE: ", output)
 
     theme_classifer = load_model(device)
 
