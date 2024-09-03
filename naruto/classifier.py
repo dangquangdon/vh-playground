@@ -101,4 +101,4 @@ if __name__ == "__main__":
 
     metadata_path = valohai.outputs().path(f"{output}.metadata.json")
     with open(metadata_path, "w") as metadata_out:
-        json.dump(themes_df.to_dict("index"))
+        json.dump(themes_df.to_dict("index"), metadata_out)
