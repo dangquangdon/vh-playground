@@ -97,11 +97,11 @@ if __name__ == "__main__":
     
     output_thems = df["script"].apply(get_theme_inferences)
     themes_df = pd.DataFrame(output_thems.tolist())
-    themes_df.to_csv(output, encoding='utf-8', index=False)
+    
+    for index, row in themes_df.iterrows():
+        print(json.dumps({"ep": index}))
+        # Iterate over the columns in the current row
+        for col_name in themes_df.columns:
+            print(json.dumps({col_name: row[col_name]}))
 
-    with valohai.logger() as logger:
-        for index, row in themes_df.iterrows():
-            logger.log("ep", index)
-            # Iterate over the columns in the current row
-            for col_name in themes_df.columns:
-                logger.log(col_name, row[col_name])
+    themes_df.to_csv(output, encoding='utf-8', index=False)
