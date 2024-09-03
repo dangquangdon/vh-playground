@@ -1,7 +1,23 @@
 - step:
-    name: naruto
+    name: crwal-jutsu
     image: python:3.12
     command:
       - cd naruto
       - pip install -r requirements.txt
       - python crawler.py
+
+- step:
+    name: classify-sub
+    image: python:3.12
+    command:
+      - cd naruto
+      - pip install -r requirements.txt
+      - python classifier.py
+    inputs:
+    - name: subtitles
+      optional: false
+    parameters:
+      - name: example_size
+        default: 2
+        optional: false
+        type: integer
