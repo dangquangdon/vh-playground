@@ -99,10 +99,6 @@ if __name__ == "__main__":
     themes_df = pd.DataFrame(output_thems.tolist())
     themes_df.to_csv(output, encoding='utf-8', index=False)
 
-    metadata_path = valohai.outputs().path(f"{output}.metadata.json")
-    with open(metadata_path, "w") as metadata_out:
-        json.dump(themes_df.to_dict("index"), metadata_out)
-
     with valohai.logger() as logger:
-        for key, val in themes_df.to_dict("index").items():
+        for key, val in output_thems.items():
             logger.log(key, val)
