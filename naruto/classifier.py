@@ -100,5 +100,7 @@ if __name__ == "__main__":
     themes_df.to_csv(output, encoding='utf-8', index=False)
 
     with valohai.logger() as logger:
-        for key, val in output_thems.items():
-            logger.log(key, val)
+        themes = themes_df.to_dict("index")
+        for data in themes.values():
+            for key, val in data.items():
+                logger.log(key, val)
