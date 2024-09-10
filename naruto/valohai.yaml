@@ -28,7 +28,7 @@
     command:
       - cd naruto
       - pip install valohai-utils
-      - python random_metadata.py
+      - python random_metadata.py {parameters}
     parameters:
       - name: how_random
         description: How random you want the metadata to be

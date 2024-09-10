@@ -41,7 +41,7 @@ def random_m1_p1():
 
 output = valohai.outputs().path("output.txt")
 with open(output, "w") as file:
-    file.write("Something is happening....")
+    file.write("Something is happening....\n")
     for epoch in range(0, end_epoch):
         t = epoch / end_epoch
         logMetadata(
@@ -49,4 +49,7 @@ with open(output, "w") as file:
             lerp(4.0, 2.0, t) + random.random() * how_random,
             steep_log01(t) + (how_random * random_m1_p1()),
         )
-        time.sleep(wait_time * (0.8 + 0.4 * random.random()))
+        sleep_time = wait_time * (0.8 + 0.4 * random.random())
+        file.write(f"{sleep_time}\n")
+        time.sleep(sleep_time)
+        

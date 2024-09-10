@@ -75,6 +75,7 @@ def get_theme_inferences(script):
 if __name__ == "__main__":
     input_zipfile = valohai.inputs('subtitles').path()
     example_size = int(valohai.parameters('example_size').value)
+    print("EXAMPLE SIZE: ", example_size)
     output = valohai.outputs().path("classified_themes.csv")
 
     theme_classifer = load_model(device)
@@ -94,6 +95,7 @@ if __name__ == "__main__":
     df = load_subtitles_files(f"{subtitle_dir}/*.ass")
     if example_size:
         df = df.head(example_size)
+        print("DF: ", df)
     
     output_thems = df["script"].apply(get_theme_inferences)
     themes_df = pd.DataFrame(output_thems.tolist())
