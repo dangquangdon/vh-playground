@@ -26,6 +26,3 @@
         type: string
         optional: false
         description: Dataset version name    
-    environment-variables:
-      - name: PG_CONN_STR
-        description: PG connection string
