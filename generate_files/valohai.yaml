@@ -1,0 +1,31 @@
+- step:
+    name: random-files
+    image: python:3.12
+    command:
+      - cd generate_files
+      - pip install valohai-utils
+      - python file_generate.py {parameters}
+    parameters:
+      - name: number_of_files
+        type: integer
+        default: 1000
+        description: Number of files to generate
+      - name: min_file_size
+        type: integer
+        default: 1000
+        description: Minimun size of the file (in Bytes)
+      - name: max_file_size
+        type: integer
+        default: 100000
+        description: Maximum size of the file (in Bytes)
+      - name: dataset_name
+        type: string
+        optional: false
+        description: Dataset name
+      - name: dataset_version
+        type: string
+        optional: false
+        description: Dataset version name    
+    environment-variables:
+      - name: PG_CONN_STR
+        description: PG connection string
