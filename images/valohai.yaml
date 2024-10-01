@@ -3,3 +3,9 @@
     image: pytorch/pytorch
     command:
       - echo $(date)
+
+- step:
+    name: some-big-ollama
+    image: wycca1/ollama2
+    command:
+      - echo $(date)
