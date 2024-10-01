@@ -1,0 +1,5 @@
+- step:
+    name: pull-pytorch
+    image: pytorch/pytorch
+    command:
+      - echo $(date)
