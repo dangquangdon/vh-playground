@@ -2,15 +2,22 @@ import random
 import string
 import valohai
 import json
+import datetime
 
 
-def generate_random_file_content(size_in_bytes):
-    return "".join(
-        random.choices(
-            string.ascii_letters + string.digits,
-            k=size_in_bytes,
-        )
-    ).encode("utf-8")
+def generate_large_random_bytes(size_in_bytes, output_path, chunk_size=1024*1024):
+    charset = string.ascii_letters + string.digits
+    with open(output_path, "wb") as f:
+        for _ in range(size_in_bytes // chunk_size):
+            # Generate chunk-sized random string and write as bytes
+            chunk = ''.join(random.choices(charset, k=chunk_size))
+            f.write(chunk.encode('utf-8'))
+
+        # Write the remainder if size_in_bytes is not a multiple of chunk_size
+        remainder = size_in_bytes % chunk_size
+        if remainder:
+            chunk = ''.join(random.choices(charset, k=remainder))
+            f.write(chunk.encode('utf-8'))
 
 
 def generate_random_files(num_files, min_size, max_size):
@@ -25,15 +32,18 @@ def generate_random_files(num_files, min_size, max_size):
         # Generate a random file size within the specified range
         file_size = random.randint(min_size, max_size)
 
-        # Generate random content of the determined file size
-        content = generate_random_file_content(file_size)
-
         # Create the file and write the random content to it
-        output = valohai.outputs().path(f"random_file_{i}.txt")
-        with open(output, "wb") as f:
-            f.write(content)
+        name = datetime.datetime.now().isoformat()
+        filename = f"{name}-random-file.txt"
+        output = valohai.outputs().path(filename)
 
-        metadata_path = f"/valohai/outputs/random_file_{i}.metadata.json"
+        # Generate random content of the determined file size
+        generate_large_random_bytes(
+            size_in_bytes=file_size,
+            output_path=output
+        )
+
+        metadata_path = f"/valohai/outputs/{filename}.metadata.json"
         with open(metadata_path, "w") as outfile:
             json.dump(metadata, outfile)
 
