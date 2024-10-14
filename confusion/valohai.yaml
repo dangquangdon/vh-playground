@@ -1,0 +1,7 @@
+- step:
+    name: confusion-matrix
+    image: python:3.12
+    command:
+      - cd confusion
+      - pip install numpy valohai-utils scikit-learn
+      - python confusion.py
