@@ -4,4 +4,10 @@
     command:
       - cd confusion
       - pip install numpy valohai-utils scikit-learn
-      - python confusion.py
+      - python confusion.py {parameters}
+      
+    parameters:
+      - name: iterations
+        type: integer
+        default: 10
+        description: Number of iterations
