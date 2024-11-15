@@ -26,3 +26,36 @@
         type: string
         optional: false
         description: Dataset version name    
+
+- step:
+    name: multiple-dataset-random-files
+    image: python:3.12
+    command:
+      - cd generate_files
+      - pip install valohai-utils
+      - python dataset_version_generate.py {parameters}
+    parameters:
+      - name: number_of_files
+        type: integer
+        default: 1000
+        description: Number of files to generate
+      - name: min_file_size
+        type: integer
+        default: 1000
+        description: Minimun size of the file (in Bytes)
+      - name: max_file_size
+        type: integer
+        default: 100000
+        description: Maximum size of the file (in Bytes)
+      - name: dataset_name
+        type: string
+        optional: false
+        description: Dataset name
+      - name: base_dataset_version
+        type: string
+        optional: false
+        description: Base dataset version name
+      - name: number_of_dataset_versions
+        type: integer
+        default: 5
+        description: Number of dataset versions
