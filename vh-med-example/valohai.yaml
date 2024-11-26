@@ -1,0 +1,152 @@
+- step:
+    name: preprocess-data
+    image: python:3.9
+    command:
+      - pip install -r requirements.txt
+      - python ./preprocess_data.py
+    inputs:
+      - name: brain_scans
+        default: dataset://brain-scans/v1
+      - name: patient_metadata
+        default: dataset://patient-metadata/v1
+      - name: scan_parameters
+        default: dataset://scan-parameters/v1
+
+- step:
+    name: process-single-patient
+    image: python:3.9
+    command:
+      - pip install -r requirements.txt
+      - python ./preprocess_patient.py
+    inputs:
+      - name: preprocessed_scans
+      - name: preprocessed_metadata
+      - name: scan_parameters
+        default: dataset://scan-parameters/v1
+    parameters:
+      - name: patient_id
+        type: string
+        default: "patient001"
+
+- step:
+    name: create-dataset
+    image: python:3.9
+    command:
+      - pip install -r requirements.txt
+      - python ./create_dataset.py
+    inputs:
+      - name: patient_results
+        optional: true
+
+- pipeline:
+    name: process-all-patients
+    nodes:
+      - name: preprocess
+        type: execution
+        step: preprocess-data
+      - name: Process-patient001
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient001"
+      - name: Process-patient002
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient002"
+      - name: Process-patient003
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient003"
+      - name: Process-patient004
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient004"
+      - name: Process-patient005
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient005"
+      - name: Process-patient006
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient006"
+      - name: Process-patient007
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient007"
+      - name: Process-patient008
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient008"
+      - name: Process-patient009
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient009"
+      - name: Process-patient010
+        type: execution
+        step: process-single-patient
+        override:
+          parameters:
+            - name: patient_id
+              default: "patient010"
+      - name: create-final-dataset
+        type: execution
+        step: create-dataset
+    edges:
+      - [preprocess.output.preprocessed_scans.npz, Process-patient001.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient002.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient003.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient004.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient005.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient006.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient007.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient008.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient009.input.preprocessed_scans]
+      - [preprocess.output.preprocessed_scans.npz, Process-patient010.input.preprocessed_scans]
+      
+      - [preprocess.output.preprocessed_metadata.json, Process-patient001.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient002.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient003.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient004.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient005.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient006.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient007.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient008.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient009.input.preprocessed_metadata]
+      - [preprocess.output.preprocessed_metadata.json, Process-patient010.input.preprocessed_metadata]
+
+      - [Process-patient001.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient002.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient003.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient004.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient005.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient006.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient007.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient008.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient009.output.*, create-final-dataset.input.patient_results]
+      - [Process-patient010.output.*, create-final-dataset.input.patient_results]

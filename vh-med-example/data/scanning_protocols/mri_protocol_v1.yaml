@@ -1,0 +1,10 @@
+machine_settings:
+  echo_time: 30
+  magnetic_field_strength: 3.0
+  repetition_time: 2000
+  slice_thickness: 1.5
+protocol_version: v1
+sequence_parameters:
+  field_of_view: 240
+  matrix_size: 256x256
+  orientation: axial

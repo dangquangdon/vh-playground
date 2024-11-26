@@ -1,0 +1,17 @@
+{
+  "patient_id": "patient006",
+  "scan_date": "2024-11-14",
+  "age": 27,
+  "gender": "F",
+  "medical_history": {
+    "previous_conditions": [
+      "condition_0",
+      "condition_1"
+    ],
+    "medications": [
+      "med_0",
+      "med_1",
+      "med_2"
+    ]
+  }
+}

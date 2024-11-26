@@ -1,0 +1,3 @@
+valohai-utils
+pandas
+numpy
