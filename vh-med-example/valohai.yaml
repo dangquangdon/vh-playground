@@ -2,6 +2,7 @@
     name: preprocess-data
     image: python:3.9
     command:
+      - cd vh-med-example
       - pip install -r requirements.txt
       - python ./preprocess_data.py
     inputs:
@@ -16,6 +17,7 @@
     name: process-single-patient
     image: python:3.9
     command:
+      - cd vh-med-example
       - pip install -r requirements.txt
       - python ./preprocess_patient.py
     inputs:
@@ -32,6 +34,7 @@
     name: create-dataset
     image: python:3.9
     command:
+      - cd vh-med-example
       - pip install -r requirements.txt
       - python ./create_dataset.py
     inputs:
