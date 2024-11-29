@@ -1,7 +1,7 @@
 import valohai
 
 if __name__ == "__main__":
-    input = valohai.inputs("dataset").path()
+    inputs = valohai.inputs("dataset").paths()
     print("INPUT")
-    print(input)
+    [print(input) for input in inputs]
     print("OK")

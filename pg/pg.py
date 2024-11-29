@@ -2,6 +2,7 @@ import psycopg2
 import os
 import valohai
 import json
+import time
 
 
 def connect():
@@ -18,6 +19,8 @@ def connect():
     output = valohai.outputs().path("output.txt")
     with open(output, "w") as file:
         file.write(version)
+        file.write("\n")
+        file.write(str(time.time()))
     
     metadata = {
         "valohai.alias": valohai.parameters("datum_alias").value

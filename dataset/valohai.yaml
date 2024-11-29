@@ -1,10 +1,10 @@
--step:
-  name: download-dataset
-  image: python:3.9
-  command:
-    - cd dataset
-    - pip install valohai-utils
-    - python ./process_dataset.py
-  inputs:
-    - name: dataset
-      optional: false
+- step:
+    name: download-dataset
+    image: python:3.9
+    command:
+      - cd dataset
+      - pip install valohai-utils
+      - python ./process_dataset.py
+    inputs:
+      - name: dataset
+        optional: false
