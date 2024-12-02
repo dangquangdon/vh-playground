@@ -16,18 +16,17 @@ def connect():
 
     version = cur.fetchone()[0]
     print(version)
-    output = valohai.outputs().path("output.txt")
+    output = valohai.outputs().path("subdir/output.txt")
     with open(output, "w") as file:
         file.write(version)
         file.write("\n")
         file.write(str(time.time()))
-    
-    metadata = {
-        "valohai.alias": valohai.parameters("datum_alias").value
-    }
+
+    metadata = {"valohai.alias": valohai.parameters("datum_alias").value}
     metadata_path = valohai.outputs().path(f"{output}.metadata.json")
     with open(metadata_path, "w") as metadata_out:
         json.dump(metadata, metadata_out)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     connect()
