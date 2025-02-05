@@ -51,6 +51,16 @@ def generate_dataset_versions(num_files, min_size, max_size):
                 json.dump(metadata, outfile)
 
             print(f"Created {output} with size {file_size} bytes.")
+        
+        file_size = random.randint(min_size, max_size)
+        not_to_copy = "not_to_copy.exclude"
+        output_path = valohai.outputs().path(not_to_copy)
+        generate_large_random_bytes(size_in_bytes=file_size, output_path=output_path)
+        metadata_path = f"/valohai/outputs/{not_to_copy}.metadata.json"
+        with open(metadata_path, "w") as outfile:
+            json.dump(metadata, outfile)
+
+            print(f"Created {output_path} with size {file_size} bytes.")
 
 
 if __name__ == "__main__":

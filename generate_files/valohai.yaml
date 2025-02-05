@@ -59,3 +59,39 @@
         type: integer
         default: 5
         description: Number of dataset versions
+
+- step:
+    name: crete-dataset-from-other-dataset
+    image: python:3.12
+    command:
+      - cd generate_files
+      - pip install valohai-utils
+      - python generate_dv_from_dv.py {parameters}
+    parameters:
+      - name: number_of_files
+        type: integer
+        default: 5
+        description: Number of files to generate
+      - name: min_file_size
+        type: integer
+        default: 1000
+        description: Minimun size of the file (in Bytes)
+      - name: max_file_size
+        type: integer
+        default: 100000
+        description: Maximum size of the file (in Bytes)
+      - name: dataset_name
+        type: string
+        optional: false
+        description: Dataset name
+      - name: dataset_version_name
+        type: string
+        optional: false
+        description: Dataset version name
+      - name: source_dataset_uri
+        type: string
+        optional: false
+        description: Original dataset version
+      - name: packaging
+        type: integer
+        default: 1
