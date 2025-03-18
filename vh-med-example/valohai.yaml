@@ -29,6 +29,9 @@
       - name: patient_id
         type: string
         default: "patient001"
+      - name: unzip
+        type: flag
+        default: true
 
 - step:
     name: create-dataset
@@ -121,35 +124,125 @@
         type: execution
         step: create-dataset
     edges:
-      - [preprocess.output.preprocessed_scans.npz, Process-patient001.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient002.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient003.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient004.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient005.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient006.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient007.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient008.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient009.input.preprocessed_scans]
-      - [preprocess.output.preprocessed_scans.npz, Process-patient010.input.preprocessed_scans]
-      
-      - [preprocess.output.preprocessed_metadata.json, Process-patient001.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient002.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient003.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient004.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient005.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient006.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient007.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient008.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient009.input.preprocessed_metadata]
-      - [preprocess.output.preprocessed_metadata.json, Process-patient010.input.preprocessed_metadata]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient001.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient002.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient003.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient004.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient005.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient006.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient007.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient008.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient009.input.preprocessed_scans,
+        ]
+      - [
+          preprocess.output.preprocessed_scans.npz,
+          Process-patient010.input.preprocessed_scans,
+        ]
 
-      - [Process-patient001.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient002.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient003.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient004.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient005.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient006.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient007.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient008.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient009.output.*, create-final-dataset.input.patient_results]
-      - [Process-patient010.output.*, create-final-dataset.input.patient_results]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient001.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient002.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient003.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient004.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient005.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient006.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient007.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient008.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient009.input.preprocessed_metadata,
+        ]
+      - [
+          preprocess.output.preprocessed_metadata.json,
+          Process-patient010.input.preprocessed_metadata,
+        ]
+
+      - [
+          Process-patient001.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient002.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient003.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient004.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient005.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient006.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient007.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient008.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient009.output.*,
+          create-final-dataset.input.patient_results,
+        ]
+      - [
+          Process-patient010.output.*,
+          create-final-dataset.input.patient_results,
+        ]
