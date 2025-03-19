@@ -12,6 +12,10 @@
         default: dataset://patient-metadata/v1
       - name: scan_parameters
         default: dataset://scan-parameters/v1
+    parameters:
+      - name: pass_this_on
+        type: string
+        default: "pass-this-on"
 
 - step:
     name: process-single-patient
@@ -32,6 +36,9 @@
       - name: unzip
         type: flag
         default: true
+      - name: this_got_passed
+        type: string
+        default: "default"
 
 - step:
     name: create-dataset
@@ -124,6 +131,10 @@
         type: execution
         step: create-dataset
     edges:
+      - [
+          preprocess.parameter.pass_this_one,
+          Process-patient001.parameter.this_got_passed,
+        ]
       - [
           preprocess.output.preprocessed_scans.npz,
           Process-patient001.input.preprocessed_scans,
