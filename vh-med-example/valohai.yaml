@@ -7,11 +7,11 @@
       - python ./preprocess_data.py
     inputs:
       - name: brain_scans
-        default: dataset://brain-scans/v1
+        default: dataset://brain-scans/v2
       - name: patient_metadata
-        default: dataset://patient-metadata/v1
+        default: dataset://patient-metadata/v2
       - name: scan_parameters
-        default: dataset://scan-parameters/v1
+        default: dataset://scan-parameters/v2
     parameters:
       - name: pass_this_on
         type: string
@@ -28,7 +28,7 @@
       - name: preprocessed_scans
       - name: preprocessed_metadata
       - name: scan_parameters
-        default: dataset://scan-parameters/v1
+        default: dataset://scan-parameters/v2
     parameters:
       - name: patient_id
         type: string
@@ -36,7 +36,7 @@
       - name: unzip
         type: flag
         default: true
-      - name: this_got_passed
+      - name: a_this_got_passed
         type: string
         default: "default"
 
@@ -132,8 +132,8 @@
         step: create-dataset
     edges:
       - [
-          preprocess.parameter.pass_this_one,
-          Process-patient001.parameter.this_got_passed,
+          preprocess.parameter.pass_this_on,
+          Process-patient001.parameter.a_this_got_passed,
         ]
       - [
           preprocess.output.preprocessed_scans.npz,
