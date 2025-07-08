@@ -25,7 +25,7 @@
       - name: dataset_version
         type: string
         optional: false
-        description: Dataset version name    
+        description: Dataset version name
 
 - step:
     name: multiple-dataset-random-files
@@ -67,6 +67,9 @@
       - cd generate_files
       - pip install valohai-utils
       - python generate_dv_from_dv.py {parameters}
+    inputs:
+      - name: source_dataset_version_uri
+        optional: false
     parameters:
       - name: number_of_files
         type: integer
@@ -88,10 +91,6 @@
         type: string
         optional: false
         description: Dataset version name
-      - name: source_dataset_uri
-        type: string
-        optional: false
-        description: Original dataset version
       - name: packaging
         type: integer
         default: 1
