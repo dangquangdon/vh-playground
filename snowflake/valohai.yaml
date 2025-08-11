@@ -1,0 +1,7 @@
+- step:
+    name: snowflake-connection-check
+    image: python:3.12
+    command:
+      - cd snowflake
+      - pip install snowflake-snowpark-python
+      - python -m check_connection
