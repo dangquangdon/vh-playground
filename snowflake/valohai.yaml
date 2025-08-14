@@ -59,3 +59,28 @@
         default: 10000
         optional: true
         type: integer
+
+- step:
+    name: snowflake-train-and-save-model
+    image: python:3.12
+    command:
+      - cd snowflake
+      - pip install -r requirements.txt
+      - python -m train_and_save_model {parameters}
+    parameters:
+      - name: db_name
+        optional: true
+        type: string
+      - name: schema_name
+        optional: true
+        type: string
+      - name: warehouse_name
+        optional: true
+        type: string
+      - name: role
+        optional: true
+        type: string
+      - name: source_table
+        default: SOURCE_OF_TRUTH
+        optional: true
+        type: string
