@@ -313,7 +313,8 @@ class InsuranceTrainer:
         with self.tracer.start_as_current_span("train_save_ins_model"):
             try:
                 telemetry.set_span_attribute(
-                    "model.name", "INSURANCE_CHARGES_PREDICTION"
+                    "model.name",
+                    "INSURANCE_CHARGES_PREDICTION",
                 )
                 df = self.load_data()
                 feature_column_names = self.get_feature_column_names(df)

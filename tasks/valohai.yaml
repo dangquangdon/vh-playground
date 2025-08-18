@@ -1,0 +1,23 @@
+- step:
+    name: Train Iris Model
+    image: python:3.12
+    command:
+      - cd tasks
+      - pip install -r requirements.txt
+      - python train.py {parameters}
+    inputs:
+      - name: iris_dataset
+        optional: false
+    parameters:
+      - name: epochs
+        type: integer
+        default: 1
+        description: Number of epochs for training
+      - name: learning_rate
+        type: float
+        default: 0.001
+        description: Learning rate for training
+      - name: batch_size
+        type: integer
+        default: 32
+        description: Batch size for training
